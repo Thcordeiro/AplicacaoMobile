@@ -14,61 +14,72 @@ const Clock = () => {
     };
   }, []);
 
+ 
+
   const secondDegrees = ((time.getSeconds() / 60) * 360) - 90;
   const minuteDegrees = ((time.getMinutes() / 60) * 360) - 90;
-  const hourDegrees = ((time.getHours() / 12) * 360) - 90 + (0.5 * time.getMinutes());
+  const hourDegrees = ((time.getHours() / 12) * 360) - 90 + (0.4 * time.getMinutes());
 
   return (
     <View style={styles.clock}>
-      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: -0.175 * clockSize / 2 }, { rotate: `${hourDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: -0.2 * clockSize / 2 }, { rotate: `${minuteDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: -0.225 * clockSize / 2 }, { rotate: `${secondDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: 10 }, { rotate: `${hourDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: 64 }, { rotate: `${minuteDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: 70 }, { rotate: `${secondDegrees}deg` }] }]} />
       {[...Array(12)].map((_, i) => (
-        <View key={i} style={[styles.marker, { transform: [{ rotate: `${i * 30}deg` }, { translateY: -0.45 * clockSize / 2 }] }]} />
+        <View key={i} style={[styles.marker, { transform: [{ rotate: `${i * 30}deg` }, { translateY: 145  }] }]} />
       ))}
     </View>
   );
 };
 
 const { width, height } = Dimensions.get('window');
-const clockSize = Math.min(width, height) * 0.8;
+const clockSize = Math.min(width, height) * 0.4;
 
 const styles = StyleSheet.create({
   clock: {
     width: clockSize,
     height: clockSize,
-    borderRadius: clockSize / 2,
+    borderRadius: clockSize,
     borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   hand: {
     position: 'absolute',
-    bottom: '50%',
+    bottom: '10%',
     backgroundColor: 'black',
   },
   hourHand: {
-    width: 5,
-    height: '35%',
-    bottom: 0.35 * clockSize / 2,
+    position: 'absolute',
+    width:  5,
+    height: '30%',
+    bottom:  100,
+    transformOrigin: `0% 0%`,
+    
   },
   minuteHand: {
-    width: 5,
-    height: '40%',
-    bottom: 0.4 * clockSize / 2,
+    position: 'absolute',
+    width: 4,
+    height: '30%',
+    bottom:  150,
+    transformOrigin: `0% 0%`,
+  
   },
   secondHand: {
-    width: 4,
-    height: '45%',
-    bottom: 0.45 * clockSize / 2,
+    position: 'absolute',
+    width: 1,
+    height: '35%',
+    bottom: 140,
     backgroundColor: 'rgb(0, 225, 255)',
+    transformOrigin: `0% 0%`,
+   
   },
   marker: {
     position: 'absolute',
-    width: 4,
-    height: '10%',
-    bottom: '50%',
+    width: 5,
+    height: '11%',
+    bottom: '45 %',
     backgroundColor: 'black',
   },
 });
