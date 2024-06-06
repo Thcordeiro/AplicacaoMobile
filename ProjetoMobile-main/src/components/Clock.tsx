@@ -22,9 +22,9 @@ const Clock = () => {
 
   return (
     <View style={styles.clock}>
-      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: 10 }, { rotate: `${hourDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: 64 }, { rotate: `${minuteDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: 70 }, { rotate: `${secondDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: 25 }, { rotate: `${hourDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: 73 }, { rotate: `${minuteDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: 81 }, { rotate: `${secondDegrees}deg` }] }]} />
       {[...Array(12)].map((_, i) => (
         <View key={i} style={[styles.marker, { transform: [{ rotate: `${i * 30}deg` }, { translateY: 145  }] }]} />
       ))}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     width:  5,
     height: '30%',
     bottom:  100,
-    transformOrigin: `0% 0%`,
+    transformOrigin: `30% 0%`,
     
   },
   minuteHand: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     width: 4,
     height: '30%',
     bottom:  150,
-    transformOrigin: `0% 0%`,
+    transformOrigin: `60% 2%`,
   
   },
   secondHand: {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     height: '35%',
     bottom: 140,
     backgroundColor: 'rgb(0, 225, 255)',
-    transformOrigin: `0% 0%`,
+    transformOrigin: `90% 2%`,
    
   },
   marker: {
