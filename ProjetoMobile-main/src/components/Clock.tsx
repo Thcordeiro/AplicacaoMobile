@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -16,71 +16,86 @@ const Clock = () => {
 
  
 
-  const secondDegrees = ((time.getSeconds() / 60) * 360) - 90;
-  const minuteDegrees = ((time.getMinutes() / 60) * 360) - 90;
-  const hourDegrees = ((time.getHours() / 12) * 360) - 90 + (0.4 * time.getMinutes());
+  const secondDegrees =(time.getSeconds() *6) ;
+  const minuteDegrees = (time.getMinutes() *6) ;
+  const hourDegrees = time.getMinutes() * 0.5 + (time.getHours() * 30 );
+ 
+
 
   return (
+<>
+<View style={styles.container}>
     <View style={styles.clock}>
-      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: 25 }, { rotate: `${hourDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: 73 }, { rotate: `${minuteDegrees}deg` }] }]} />
-      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: 81 }, { rotate: `${secondDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.hourHand, { transform: [{ translateY: -clockSize/8.9 }, { rotate: `${hourDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.minuteHand, { transform: [{ translateY: -clockSize/7.3  }, { rotate: `${minuteDegrees}deg` }] }]} />
+      <View style={[styles.hand, styles.secondHand, { transform: [{ translateY: -clockSize/6  }, { rotate: `${secondDegrees}deg` }] }]} />
+      <View style={styles.center}></View>
       {[...Array(12)].map((_, i) => (
-        <View key={i} style={[styles.marker, { transform: [{ rotate: `${i * 30}deg` }, { translateY: 145  }] }]} />
+        <View key={i} style={[styles.marker, { transform: [{ rotate: `${i * 30}deg` }, { translateY: clockSize/2.4  }] }]} />
       ))}
     </View>
+  </View>
+    </>
   );
 };
 
 const { width, height } = Dimensions.get('window');
-const clockSize = Math.min(width, height) * 0.4;
-
+const coeficienteClockSize = 400;
+const clockSize = (width/height)*coeficienteClockSize;
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   clock: {
+    height:clockSize,
     width: clockSize,
-    height: clockSize,
-    borderRadius: clockSize,
+    borderRadius: clockSize/2,
     borderColor: 'black',
-    borderWidth: 5,
+    borderWidth: clockSize/40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   hand: {
     position: 'absolute',
-    bottom: '10%',
     backgroundColor: 'black',
   },
   hourHand: {
     position: 'absolute',
-    width:  5,
-    height: '30%',
-    bottom:  100,
-    transformOrigin: `30% 0%`,
+    width:  clockSize/55,
+    height: clockSize/4,
+    transformOrigin: `50% 100%`,
     
   },
   minuteHand: {
     position: 'absolute',
-    width: 4,
-    height: '30%',
-    bottom:  150,
-    transformOrigin: `60% 2%`,
+    width: clockSize/70,
+    height: clockSize/3.5,
+    transformOrigin: `50% 100%`,
   
   },
   secondHand: {
     position: 'absolute',
     width: 1,
-    height: '35%',
-    bottom: 140,
+    height: clockSize/3,
     backgroundColor: 'rgb(0, 225, 255)',
-    transformOrigin: `90% 2%`,
+    transformOrigin: `50% 100%`,
    
   },
   marker: {
     position: 'absolute',
-    width: 5,
-    height: '11%',
-    bottom: '45 %',
+    width: clockSize/50,
+    height: clockSize/7,
     backgroundColor: 'black',
+  },
+  center: {
+    width: clockSize/30,
+    height: clockSize/30,
+    borderRadius: clockSize,
+    backgroundColor:'#a52a2a',
+    position:'absolute',
+
+    zIndex: 2
   },
 });
 
