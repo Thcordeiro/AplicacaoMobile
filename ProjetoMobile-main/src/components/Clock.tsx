@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: clockSize/30,
     height: clockSize/30,
     borderRadius: clockSize,
-    backgroundColor:'#a52a2a',
+    backgroundColor:'#000000',
     position:'absolute',
 
     zIndex: 2
